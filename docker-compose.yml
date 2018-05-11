@@ -1,0 +1,18 @@
+version: '3.4'
+services:
+  bookingham-mysql:
+          container_name: bookingham-mysql
+          image: mysql:5.6
+          volumes:
+              - bookinghamdb:/var/lib/mysql/
+          environment:
+              - MYSQL_USER=root
+              - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+              - MYSQL_DATABASE=bookinghamdb
+          ports:
+              - "3306:3306"
+          command: mysqld --lower_case_table_names=1 --skip-ssl
+
+volumes:
+    bookinghamdb:
+        driver: local
