@@ -1,6 +1,6 @@
 package de.maibornwolff.ste.bookingham_palace.booking.model;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
@@ -8,9 +8,9 @@ public class BookingRequest {
 
     private long hotelId;
 
-    private Instant startDate;
+    private LocalDate startDate;
 
-    private Instant endDate;
+    private LocalDate endDate;
 
 
     public long getHotelId() {
@@ -23,22 +23,22 @@ public class BookingRequest {
     }
 
 
-    public Instant getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
 
-    public void setStartDate(Instant startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
 
-    public Instant getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
 
-    public void setEndDate(Instant endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

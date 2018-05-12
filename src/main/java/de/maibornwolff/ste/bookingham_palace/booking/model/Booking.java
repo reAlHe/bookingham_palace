@@ -1,29 +1,18 @@
 package de.maibornwolff.ste.bookingham_palace.booking.model;
 
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Currency;
-import java.util.List;
+import java.time.LocalDate;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import de.maibornwolff.ste.bookingham_palace.hotel.model.Feature;
 import de.maibornwolff.ste.bookingham_palace.hotel.model.Hotel;
-import de.maibornwolff.ste.bookingham_palace.rating.model.Rating;
 import de.maibornwolff.ste.bookingham_palace.user.model.User;
 
 @Entity
@@ -46,11 +35,11 @@ public class Booking {
 
     @NotNull
     @Column(name = "start_date")
-    private Instant startDate;
+    private LocalDate startDate;
 
     @NotNull
     @Column(name = "end_date")
-    private Instant endDate;
+    private LocalDate endDate;
 
 
     public long getId() {
@@ -83,22 +72,22 @@ public class Booking {
     }
 
 
-    public Instant getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
 
-    public void setStartDate(Instant startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
 
-    public Instant getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
 
-    public void setEndDate(Instant endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
