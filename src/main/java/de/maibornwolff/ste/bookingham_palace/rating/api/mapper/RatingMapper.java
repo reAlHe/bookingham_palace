@@ -8,6 +8,9 @@ import de.maibornwolff.ste.bookingham_palace.rating.model.RatingRequest;
 import de.maibornwolff.ste.bookingham_palace.hotel.service.HotelService;
 import de.maibornwolff.ste.bookingham_palace.rating.model.RatingResponse;
 
+/**
+ * Mapper to map all the rating related requests and responses
+ */
 @Service
 public class RatingMapper {
 
@@ -18,6 +21,12 @@ public class RatingMapper {
     }
 
 
+    /**
+     * Maps a rating request to the rating entity
+     *
+     * @param ratingRequest the rating request
+     * @return an object of rating
+     */
     public Rating ratingRequestToRating(RatingRequest ratingRequest) {
         Rating rating = new Rating();
         rating.setHotel(hotelService.findHotelById(ratingRequest.getHotelId()));
@@ -27,12 +36,13 @@ public class RatingMapper {
     }
 
 
-    public List<RatingResponse> ratingsToRatingResponses(List<Rating> ratings) {
-        return ratings.stream().map(this::ratingToRatingResponse).collect(Collectors.toList());
-    }
-
-
-    private RatingResponse ratingToRatingResponse(Rating rating) {
+    /**
+     * Maps a rating to a rating response
+     *
+     * @param rating a rating
+     * @return a rating response for the given rating
+     */
+    public RatingResponse ratingToRatingResponse(Rating rating) {
         RatingResponse ratingResponse = new RatingResponse();
         ratingResponse.setId(rating.getId());
         ratingResponse.setHotel(rating.getHotel().getName());
@@ -43,4 +53,14 @@ public class RatingMapper {
         return ratingResponse;
     }
 
+
+    /**
+     * Maps a list of ratings to rating responses
+     *
+     * @param ratings a list of ratings
+     * @return a list of rating responses
+     */
+    public List<RatingResponse> ratingsToRatingResponses(List<Rating> ratings) {
+        return ratings.stream().map(this::ratingToRatingResponse).collect(Collectors.toList());
+    }
 }

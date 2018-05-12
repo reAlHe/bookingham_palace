@@ -6,9 +6,19 @@ import de.maibornwolff.ste.bookingham_palace.user.model.User;
 import de.maibornwolff.ste.bookingham_palace.user.model.UserRequest;
 import de.maibornwolff.ste.bookingham_palace.user.model.UserResponse;
 
+/**
+ * Mapper to map all the booking related requests and responses
+ */
 @Service
 public class UserMapper {
 
+
+    /**
+     * Maps a user request to the user entity
+     *
+     * @param userRequest a user request
+     * @return an object of user
+     */
     public User mapUserRequestToUser(UserRequest userRequest) {
         User user = new User();
         user.setUsername(userRequest.getUsername());
@@ -19,6 +29,13 @@ public class UserMapper {
         return user;
     }
 
+
+    /**
+     * Maps a user to an user response
+     *
+     * @param user a user
+     * @return a user response from the given user
+     */
     public UserResponse mapUserToUserResponse(User user) {
         UserResponse userResponse = new UserResponse();
         userResponse.setUsername(user.getUsername());

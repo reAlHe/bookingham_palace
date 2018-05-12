@@ -17,6 +17,9 @@ import static de.maibornwolff.ste.bookingham_palace.user.api.constants.ErrorCons
 import static de.maibornwolff.ste.bookingham_palace.user.api.constants.ErrorConstants.MSG_USER_ALREADY_REGISTERED;
 import static de.maibornwolff.ste.bookingham_palace.user.api.constants.UserConstants.RESOURCE_USER;
 
+/**
+ * Rest controller for managing users.
+ */
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
@@ -30,6 +33,14 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
+
+    /**
+     * POST /users : Creates a new user
+     *
+     * @param userRequest the user to be created
+     * @return the created user with status 201 (created),
+     * or status 400 (bad request) when the username already exists
+     */
     @CrossOrigin()
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity createUser(@RequestBody UserRequest userRequest) {

@@ -9,6 +9,9 @@ import de.maibornwolff.ste.bookingham_palace.hotel.model.HotelResponse;
 import de.maibornwolff.ste.bookingham_palace.rating.api.mapper.RatingMapper;
 import de.maibornwolff.ste.bookingham_palace.user.service.UserService;
 
+/**
+ * Mapper to map all hotel related requests and responses
+ */
 @Service
 public class HotelMapper {
 
@@ -23,6 +26,12 @@ public class HotelMapper {
     }
 
 
+    /**
+     * Maps a hotel request to the hotel entity
+     *
+     * @param request the hotel request
+     * @return an object of hotel
+     */
     public Hotel mapHotelRequestToHotel(HotelRequest request) {
         Hotel hotel = new Hotel();
         hotel.setName(request.getName());
@@ -35,6 +44,12 @@ public class HotelMapper {
     }
 
 
+    /**
+     * Maps a hotel to a hotel response
+     *
+     * @param hotel the hotel
+     * @return a hotel response from the given hotel
+     */
     public HotelResponse mapHotelToHotelResponse(Hotel hotel){
         HotelResponse hotelResponse = new HotelResponse();
         hotelResponse.setId(hotel.getId());
@@ -49,6 +64,12 @@ public class HotelMapper {
     }
 
 
+    /**
+     * Maps a list of hotels to hotel responses
+     *
+     * @param hotels the list of hotels
+     * @return a list of hotel responses
+     */
     public List<HotelResponse> mapHotelsToHotelResponses(List<Hotel> hotels) {
         return hotels.stream().map(this::mapHotelToHotelResponse).collect(Collectors.toList());
     }

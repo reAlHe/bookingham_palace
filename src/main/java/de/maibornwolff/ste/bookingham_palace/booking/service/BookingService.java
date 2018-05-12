@@ -11,10 +11,13 @@ import de.maibornwolff.ste.bookingham_palace.booking.repository.BookingRepositor
 import de.maibornwolff.ste.bookingham_palace.booking.service.errors.BookingNotFoundException;
 import de.maibornwolff.ste.bookingham_palace.hotel.model.Hotel;
 import de.maibornwolff.ste.bookingham_palace.hotel.service.HotelService;
-import de.maibornwolff.ste.bookingham_palace.hotel.service.errors.UnauthorizedException;
+import de.maibornwolff.ste.bookingham_palace.system.errors.UnauthorizedException;
 import de.maibornwolff.ste.bookingham_palace.user.model.User;
 import de.maibornwolff.ste.bookingham_palace.user.service.UserService;
 
+/**
+ * Provides business logic for the entity booking
+ */
 @Service
 public class BookingService {
 
@@ -34,6 +37,13 @@ public class BookingService {
     }
 
 
+    /**
+     * Creates a booking
+     *
+     * @param booking the booking to be created
+     * @param username the username of the requesting user
+     * @return the created booking
+     */
     @Transactional
     public Booking createBooking(Booking booking, String username) {
         log.info("Received request to add booking {}", booking);
@@ -43,6 +53,14 @@ public class BookingService {
     }
 
 
+    /**
+     * Updates a booking
+     *
+     * @param bookingId the booking id of the booking to be updated
+     * @param bookingUpdate the update for the booking
+     * @param username the username of the requesting user
+     * @return the updated booking or a BookingNotFoundException when the booking does not exist
+     */
     @Transactional
     public Booking updateBooking(long bookingId, Booking bookingUpdate, String username) {
         log.info("Received request to update booking {}", bookingUpdate);
@@ -61,6 +79,12 @@ public class BookingService {
     }
 
 
+    /**
+     * Gets all bookings of the user
+     *
+     * @param username the username of the requesting user
+     * @return a list with all bookings of the user
+     */
     @Transactional
     public List<Booking> getAllBookingsOfUser(String username) {
         log.info("Received request to get all bookings of user {}", username);
@@ -69,6 +93,13 @@ public class BookingService {
     }
 
 
+    /**
+     * Gets all bookings ofr the given hotel
+     *
+     * @param hotelId the id of the hotel
+     * @param username the username of the requesting user
+     * @return a list of all bookings for the hotel
+     */
     @Transactional
     public List<Booking> getAllBookingsOfHotel(long hotelId, String username) {
         log.info("Received request to get all bookings of hotel with id {}", hotelId);
@@ -83,6 +114,12 @@ public class BookingService {
     }
 
 
+    /**
+     * Deletes a booking with given id
+     *
+     * @param bookingId the id of the booking to be deleted
+     * @param username the username of the requesting user or a BookingNotFoundException when no booking with given id exists
+     */
     @Transactional
     public void deleteBooking(long bookingId, String username) {
         log.info("Received request to delete bookings with id {}", bookingId);

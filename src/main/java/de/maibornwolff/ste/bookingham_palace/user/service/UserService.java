@@ -1,7 +1,6 @@
 package de.maibornwolff.ste.bookingham_palace.user.service;
 
 import java.util.Objects;
-import java.util.Optional;
 import javax.naming.AuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +16,10 @@ import de.maibornwolff.ste.bookingham_palace.user.repository.UserRepository;
 import de.maibornwolff.ste.bookingham_palace.user.service.errors.UsernameAlreadyInUseException;
 import static de.maibornwolff.ste.bookingham_palace.user.api.constants.UserConstants.MAXIMAL_FAILED_LOGINS;
 
+
+/**
+ * Provides business logic for the entity user
+ */
 @Service
 public class UserService {
 
@@ -30,6 +33,12 @@ public class UserService {
     }
 
 
+    /**
+     * Creates a new user
+     *
+     * @param user the user to be created
+     * @return the created user or a UsernameAlreadyInUseException when the username is already in use
+     */
     @Transactional
     public User createUser(User user) {
         log.info("Received request for creating user {}", user);
@@ -40,6 +49,13 @@ public class UserService {
     }
 
 
+    /**
+     * Authenticates the user
+     *
+     * @param credentials the credentials
+     * @return a token to identify the user
+     * @throws AuthenticationException is thrown when the credentials does not identify a user
+     */
     public Token authenticateUser(Credentials credentials) throws AuthenticationException {
         log.info("Received request for authenticating user with credentials {}", credentials);
         User user = findUserByUsername(credentials.getUsername());
@@ -50,16 +66,29 @@ public class UserService {
             processFailedLogin(user);
             throw new AuthenticationException();
         }
+        clearFailedLogins(user);
         return new Token(Tokens.create(credentials.getUsername()));
     }
 
 
+    /**
+     * Determines whether a username is already in use
+     *
+     * @param username a username
+     * @return true if the username already exists, else false
+     */
     @Transactional
     public boolean isUsernameInUse(String username) {
         return userRepository.existsByUsername(username);
     }
 
 
+    /**
+     * Increments the number of failed logins for the user
+     *
+     * @param user a user
+     * @return the number of failed logins
+     */
     @Transactional
     public int incrementFailedLogins(User user) {
         user.setFailedLogins(user.getFailedLogins() + 1);
@@ -68,6 +97,11 @@ public class UserService {
     }
 
 
+    /**
+     * Locks a user
+     *
+     * @param user a user
+     */
     @Transactional
     public void lockUser(User user) {
         user.setLocked(true);
@@ -75,6 +109,11 @@ public class UserService {
     }
 
 
+    /**
+     * Clears the number of failed logins of a user
+     *
+     * @param user a user
+     */
     @Transactional
     public void clearFailedLogins(User user) {
         user.setFailedLogins(0);
@@ -82,6 +121,12 @@ public class UserService {
     }
 
 
+    /**
+     * Finds a user in the repository by its username
+     *
+     * @param username a username
+     * @return a user with given username or a UserNotFoundException if no user with given username exists
+     */
     @Transactional
     public User findUserByUsername(String username) {
         return userRepository.findOneByUsername(username).orElseThrow(UserNotFoundException::new);

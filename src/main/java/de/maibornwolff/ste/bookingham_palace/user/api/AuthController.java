@@ -20,6 +20,9 @@ import static de.maibornwolff.ste.bookingham_palace.user.api.constants.ErrorCons
 import static de.maibornwolff.ste.bookingham_palace.user.api.constants.ErrorConstants.MSG_USER_IS_LOCKED;
 import static de.maibornwolff.ste.bookingham_palace.user.api.constants.UserConstants.RESOURCE_USER;
 
+/**
+ * Rest controller for managing authentications.
+ */
 @RestController
 @RequestMapping(value = "/authentication")
 public class AuthController {
@@ -31,6 +34,13 @@ public class AuthController {
     }
 
 
+    /**
+     * POST /authentication/auth : Authenticates the user
+     *
+     * @param credentials the credentials
+     * @return a token with status 200 (ok),
+     * or status 401 (unauthorized) if the credentials are wrong or the user is locked
+     */
     @CrossOrigin()
     @RequestMapping(value = "/auth", method = RequestMethod.POST)
     public ResponseEntity<Token> authenticateUser(@RequestBody Credentials credentials) {
@@ -46,6 +56,14 @@ public class AuthController {
         }
     }
 
+
+    /**
+     * POST /authentication/validate : Validates a token
+     *
+     * @param token the token to validate the user
+     * @return status 200 (ok) when the token is valid,
+     * or status 403 (forbidden) when the token is not valid
+     */
     @CrossOrigin()
     @RequestMapping(value = "/validate", method = RequestMethod.POST)
     public ResponseEntity<Token> validateToken(@RequestBody Token token) {
@@ -56,6 +74,13 @@ public class AuthController {
         }
     }
 
+
+    /**
+     * POST /authentication/logout : Logs the user out
+     *
+     * @param token the token to validate the user
+     * @return status 200 (ok)
+     */
     @CrossOrigin()
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public ResponseEntity clearToken(@RequestBody Token token) {

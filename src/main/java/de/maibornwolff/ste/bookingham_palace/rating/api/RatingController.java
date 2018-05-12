@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import de.maibornwolff.ste.bookingham_palace.hotel.service.errors.UnauthorizedException;
+import de.maibornwolff.ste.bookingham_palace.system.errors.UnauthorizedException;
 import de.maibornwolff.ste.bookingham_palace.rating.api.mapper.RatingMapper;
 import de.maibornwolff.ste.bookingham_palace.hotel.service.errors.HotelNotFoundException;
 import de.maibornwolff.ste.bookingham_palace.rating.model.Rating;
@@ -30,6 +30,9 @@ import static de.maibornwolff.ste.bookingham_palace.rating.api.constants.ErrorCo
 import static de.maibornwolff.ste.bookingham_palace.rating.api.constants.ErrorConstants.MSG_RATING_NOT_FOUND;
 import static de.maibornwolff.ste.bookingham_palace.rating.api.constants.RatingConstants.RESOURCE_RATING;
 
+/**
+ * Rest controller for managing ratings.
+ */
 @RestController
 @RequestMapping(value = "/ratings")
 public class RatingController {
@@ -45,6 +48,15 @@ public class RatingController {
     }
 
 
+    /**
+     * POST /ratings : Creates a rating for a hotel
+     *
+     * @param token the token to validate the user
+     * @param rating the rating
+     * @return the created rating with status 201 (created),
+     * or status 400 (bad request) when the corresponding hotel does not exist
+     * or status 401 (unauthorized) when no valid token is provided
+     */
     @CrossOrigin()
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity addRatingToHotel(@CookieValue(value = "token", required = false) String token,
@@ -53,23 +65,30 @@ public class RatingController {
             throw new UnauthorizedAlertException(RESOURCE_RATING);
         }
         try {
-            ratingService.createRating(ratingMapper.ratingRequestToRating(rating), Tokens.getUser(token));
-            return new ResponseEntity<>(HttpStatus.OK);
+            Rating createdRating = ratingService.createRating(ratingMapper.ratingRequestToRating(rating), Tokens.getUser(token));
+            return new ResponseEntity<>(ratingMapper.ratingToRatingResponse(createdRating), HttpStatus.OK);
         } catch (HotelNotFoundException e) {
             throw new BadRequestAlertException(MSG_HOTEL_NOT_FOUND, RESOURCE_HOTEL, KEY_HOTEL_NOT_FOUND);
         }
     }
 
 
+    /**
+     * DELETE /ratings/ratingId : Deletes a rating
+     *
+     * @param token he token to validate the user
+     * @param ratingId the id of the rating to be deleted
+     * @return status 200 (ok) when the rating could be deleted
+     */
     @CrossOrigin()
     @RequestMapping(path = "/{ratingId}", method = RequestMethod.DELETE)
-    public ResponseEntity addRatingToHotel(@CookieValue(value = "token", required = false) String token,
-                                           @PathVariable long hotelId) {
+    public ResponseEntity deleteRatingForHotel(@CookieValue(value = "token", required = false) String token,
+                                           @PathVariable long ratingId) {
         if (!Tokens.verify(token)) {
             throw new UnauthorizedAlertException(RESOURCE_RATING);
         }
         try {
-            ratingService.deleteRating(hotelId, Tokens.getUser(token));
+            ratingService.deleteRating(ratingId, Tokens.getUser(token));
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (RatingNotFoundException e) {
             throw new ResourceNotFoundException(MSG_RATING_NOT_FOUND, RESOURCE_RATING, KEY_RATING_NOT_FOUND);
