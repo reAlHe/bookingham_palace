@@ -8,6 +8,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,6 +54,7 @@ public class Hotel {
     @ManyToOne
     private User contact;
 
+    @NotNull
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "hotel")
     private List<Rating> ratings = new ArrayList<>();

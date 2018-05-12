@@ -135,13 +135,12 @@ public class HotelService {
 
 
     /**
-     * Retireves all hotels in a coty that have an average rating better than a minimum
+     * Retrieves all hotels in a city that have an average rating better than a minimum
      *
      * @param city the city to filter for
      * @param minimumRating the minimum rating
      * @return a list with all hotels in the city that have an average rating better than a minimum
      */
-    @Transactional
     public List<Hotel> retrieveAllHotelsInCityWithRatingBetterThan(String city, int minimumRating) {
         List<Hotel> hotels = retrieveAllHotelsIn(city);
         return hotels.stream().filter(h -> hasHotelRatingBetterThan(h, minimumRating)).collect(Collectors.toList());

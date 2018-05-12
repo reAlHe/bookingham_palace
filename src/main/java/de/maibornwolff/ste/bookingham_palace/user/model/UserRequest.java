@@ -1,17 +1,16 @@
 package de.maibornwolff.ste.bookingham_palace.user.model;
 
 import java.io.Serializable;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserRequest implements Serializable {
 
-    @JsonProperty
+
     private String username;
-    @JsonProperty
+
     private String firstName;
-    @JsonProperty
+
     private String lastName;
-    @JsonProperty
+
     private String password;
 
 
