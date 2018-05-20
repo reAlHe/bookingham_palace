@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import de.maibornwolff.ste.bookingham_palace.BookinghamPalaceApplication;
+import de.maibornwolff.ste.bookingham_palace.system.errors.ExceptionTranslator;
 import de.maibornwolff.ste.bookingham_palace.user.api.databuilder.CredentialsBuilder;
 import de.maibornwolff.ste.bookingham_palace.user.api.databuilder.UserBuilder;
 import de.maibornwolff.ste.bookingham_palace.user.api.databuilder.UserRequestBuilder;
@@ -37,10 +38,14 @@ public class AuthControllerTest {
     @Autowired
     private AuthController authController;
 
+    @Autowired
+    private ExceptionTranslator exceptionTranslator;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         this.restMockMvc = MockMvcBuilders.standaloneSetup(authController)
+                .setControllerAdvice(exceptionTranslator)
                 .build();
     }
 

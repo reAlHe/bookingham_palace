@@ -14,6 +14,7 @@ import de.maibornwolff.ste.bookingham_palace.user.auth.Tokens;
 import de.maibornwolff.ste.bookingham_palace.user.model.Credentials;
 import de.maibornwolff.ste.bookingham_palace.user.model.Token;
 import de.maibornwolff.ste.bookingham_palace.user.service.UserService;
+import de.maibornwolff.ste.bookingham_palace.user.service.errors.UserNotFoundException;
 import static de.maibornwolff.ste.bookingham_palace.user.api.constants.ErrorConstants.KEY_INCORRECT_USER_PASSWORD;
 import static de.maibornwolff.ste.bookingham_palace.user.api.constants.ErrorConstants.KEY_USER_IS_LOCKED;
 import static de.maibornwolff.ste.bookingham_palace.user.api.constants.ErrorConstants.MSG_INCORRECT_USER_PASSWORD;
@@ -48,7 +49,7 @@ public class AuthController {
             Token token = userService.authenticateUser(credentials);
             return new ResponseEntity<>(token, HttpStatus.OK);
         }
-        catch (AuthenticationException e) {
+        catch (AuthenticationException | UserNotFoundException e) {
             throw new UnauthorizedAlertException(MSG_INCORRECT_USER_PASSWORD, RESOURCE_USER, KEY_INCORRECT_USER_PASSWORD);
         }
         catch (UserIsLockedException e) {
