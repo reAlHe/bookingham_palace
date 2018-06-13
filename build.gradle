@@ -38,6 +38,7 @@ dependencies {
 	compile "com.fasterxml.jackson.core:jackson-annotations"
 	compile "com.fasterxml.jackson.core:jackson-databind"
 	compile "com.fasterxml.jackson.module:jackson-module-afterburner"
+	compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
