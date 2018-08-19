@@ -1,7 +1,8 @@
-package de.maibornwolff.ste.bookingham_palace.rating.model;
+package de.maibornwolff.ste.bookingham_palace.rating.api.dto;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import de.maibornwolff.ste.bookingham_palace.rating.model.RatingCategory;
 
 public class RatingRequest {
 

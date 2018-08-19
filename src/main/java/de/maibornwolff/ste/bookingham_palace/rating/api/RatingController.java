@@ -4,24 +4,24 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import de.maibornwolff.ste.bookingham_palace.system.errors.UnauthorizedException;
-import de.maibornwolff.ste.bookingham_palace.rating.api.mapper.RatingMapper;
 import de.maibornwolff.ste.bookingham_palace.hotel.service.errors.HotelNotFoundException;
+import de.maibornwolff.ste.bookingham_palace.rating.api.dto.RatingRequest;
+import de.maibornwolff.ste.bookingham_palace.rating.api.mapper.RatingMapper;
 import de.maibornwolff.ste.bookingham_palace.rating.model.Rating;
-import de.maibornwolff.ste.bookingham_palace.rating.model.RatingRequest;
 import de.maibornwolff.ste.bookingham_palace.rating.service.RatingService;
 import de.maibornwolff.ste.bookingham_palace.rating.service.errors.RatingNotFoundException;
 import de.maibornwolff.ste.bookingham_palace.system.errors.BadRequestAlertException;
 import de.maibornwolff.ste.bookingham_palace.system.errors.ForbiddenException;
 import de.maibornwolff.ste.bookingham_palace.system.errors.ResourceNotFoundException;
-import de.maibornwolff.ste.bookingham_palace.user.auth.Tokens;
+import de.maibornwolff.ste.bookingham_palace.system.errors.UnauthorizedException;
+import de.maibornwolff.ste.bookingham_palace.system.auth.Tokens;
 import de.maibornwolff.ste.bookingham_palace.user.service.errors.UnauthorizedAlertException;
 import static de.maibornwolff.ste.bookingham_palace.hotel.api.constants.ErrorConstants.KEY_HOTEL_NOT_FOUND;
 import static de.maibornwolff.ste.bookingham_palace.hotel.api.constants.ErrorConstants.MSG_HOTEL_NOT_FOUND;
@@ -57,8 +57,7 @@ public class RatingController {
      * or status 400 (bad request) when the corresponding hotel does not exist
      * or status 401 (unauthorized) when no valid token is provided
      */
-    @CrossOrigin()
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public ResponseEntity addRatingToHotel(@CookieValue(value = "token", required = false) String token,
                                            @RequestBody RatingRequest rating) {
         if (!Tokens.verify(token)) {
@@ -80,8 +79,7 @@ public class RatingController {
      * @param ratingId the id of the rating to be deleted
      * @return status 200 (ok) when the rating could be deleted
      */
-    @CrossOrigin()
-    @RequestMapping(path = "/{ratingId}", method = RequestMethod.DELETE)
+    @DeleteMapping(path = "/{ratingId}")
     public ResponseEntity deleteRatingForHotel(@CookieValue(value = "token", required = false) String token,
                                            @PathVariable long ratingId) {
         if (!Tokens.verify(token)) {
@@ -98,7 +96,6 @@ public class RatingController {
     }
 
 
-    @CrossOrigin()
     @GetMapping
     public ResponseEntity getAllRatingsOfUser(@CookieValue(value = "token", required = false) String token) {
         if (!Tokens.verify(token)) {

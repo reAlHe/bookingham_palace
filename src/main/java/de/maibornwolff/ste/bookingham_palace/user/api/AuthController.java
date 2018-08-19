@@ -3,17 +3,16 @@ package de.maibornwolff.ste.bookingham_palace.user.api;
 import javax.naming.AuthenticationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import de.maibornwolff.ste.bookingham_palace.user.service.errors.UnauthorizedAlertException;
-import de.maibornwolff.ste.bookingham_palace.user.service.errors.UserIsLockedException;
-import de.maibornwolff.ste.bookingham_palace.user.auth.Tokens;
+import de.maibornwolff.ste.bookingham_palace.system.auth.Tokens;
 import de.maibornwolff.ste.bookingham_palace.user.model.Credentials;
 import de.maibornwolff.ste.bookingham_palace.user.model.Token;
 import de.maibornwolff.ste.bookingham_palace.user.service.UserService;
+import de.maibornwolff.ste.bookingham_palace.user.service.errors.UnauthorizedAlertException;
+import de.maibornwolff.ste.bookingham_palace.user.service.errors.UserIsLockedException;
 import de.maibornwolff.ste.bookingham_palace.user.service.errors.UserNotFoundException;
 import static de.maibornwolff.ste.bookingham_palace.user.api.constants.ErrorConstants.KEY_INCORRECT_USER_PASSWORD;
 import static de.maibornwolff.ste.bookingham_palace.user.api.constants.ErrorConstants.KEY_USER_IS_LOCKED;
@@ -42,8 +41,7 @@ public class AuthController {
      * @return a token with status 200 (ok),
      * or status 401 (unauthorized) if the credentials are wrong or the user is locked
      */
-    @CrossOrigin()
-    @RequestMapping(value = "/auth", method = RequestMethod.POST)
+    @PostMapping(value = "/auth")
     public ResponseEntity<Token> authenticateUser(@RequestBody Credentials credentials) {
         try {
             Token token = userService.authenticateUser(credentials);
@@ -65,8 +63,7 @@ public class AuthController {
      * @return status 200 (ok) when the token is valid,
      * or status 403 (forbidden) when the token is not valid
      */
-    @CrossOrigin()
-    @RequestMapping(value = "/validate", method = RequestMethod.POST)
+    @PostMapping(value = "/validate")
     public ResponseEntity<Token> validateToken(@RequestBody Token token) {
         if(Tokens.verify(token.getToken())){
             return new ResponseEntity<>(HttpStatus.OK);
@@ -82,8 +79,7 @@ public class AuthController {
      * @param token the token to validate the user
      * @return status 200 (ok)
      */
-    @CrossOrigin()
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @PostMapping(value = "/logout")
     public ResponseEntity clearToken(@RequestBody Token token) {
         Tokens.clear(token.getToken());
 

@@ -1,4 +1,4 @@
-package de.maibornwolff.ste.bookingham_palace.user.auth;
+package de.maibornwolff.ste.bookingham_palace.system.auth;
 
 import java.security.SecureRandom;
 import java.util.Locale;

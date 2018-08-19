@@ -3,8 +3,8 @@ package de.maibornwolff.ste.bookingham_palace.user.api.mapper;
 
 import org.springframework.stereotype.Service;
 import de.maibornwolff.ste.bookingham_palace.user.model.User;
-import de.maibornwolff.ste.bookingham_palace.user.model.UserRequest;
-import de.maibornwolff.ste.bookingham_palace.user.model.UserResponse;
+import de.maibornwolff.ste.bookingham_palace.user.api.dto.UserRequest;
+import de.maibornwolff.ste.bookingham_palace.user.api.dto.UserResponse;
 
 /**
  * Mapper to map all the booking related requests and responses

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import de.maibornwolff.ste.bookingham_palace.user.service.errors.UserIsLockedException;
 import de.maibornwolff.ste.bookingham_palace.user.service.errors.UserNotFoundException;
-import de.maibornwolff.ste.bookingham_palace.user.auth.Tokens;
+import de.maibornwolff.ste.bookingham_palace.system.auth.Tokens;
 import de.maibornwolff.ste.bookingham_palace.user.model.Credentials;
 import de.maibornwolff.ste.bookingham_palace.user.model.Token;
 import de.maibornwolff.ste.bookingham_palace.user.model.User;

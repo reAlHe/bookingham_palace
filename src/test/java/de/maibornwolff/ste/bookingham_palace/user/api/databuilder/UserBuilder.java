@@ -1,7 +1,6 @@
 package de.maibornwolff.ste.bookingham_palace.user.api.databuilder;
 
 import de.maibornwolff.ste.bookingham_palace.user.model.User;
-import de.maibornwolff.ste.bookingham_palace.user.model.UserRequest;
 
 public class UserBuilder {
 

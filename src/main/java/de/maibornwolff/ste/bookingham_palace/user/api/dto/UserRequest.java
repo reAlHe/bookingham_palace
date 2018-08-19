@@ -1,4 +1,4 @@
-package de.maibornwolff.ste.bookingham_palace.user.model;
+package de.maibornwolff.ste.bookingham_palace.user.api.dto;
 
 import java.io.Serializable;
 

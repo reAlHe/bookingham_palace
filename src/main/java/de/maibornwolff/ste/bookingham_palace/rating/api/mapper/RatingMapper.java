@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import de.maibornwolff.ste.bookingham_palace.rating.model.Rating;
-import de.maibornwolff.ste.bookingham_palace.rating.model.RatingRequest;
+import de.maibornwolff.ste.bookingham_palace.rating.api.dto.RatingRequest;
 import de.maibornwolff.ste.bookingham_palace.hotel.service.HotelService;
-import de.maibornwolff.ste.bookingham_palace.rating.model.RatingResponse;
+import de.maibornwolff.ste.bookingham_palace.rating.api.dto.RatingResponse;
 
 /**
  * Mapper to map all the rating related requests and responses

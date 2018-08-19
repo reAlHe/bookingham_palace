@@ -1,7 +1,6 @@
 package de.maibornwolff.ste.bookingham_palace.user.api;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -15,13 +14,9 @@ import de.maibornwolff.ste.bookingham_palace.BookinghamPalaceApplication;
 import de.maibornwolff.ste.bookingham_palace.system.errors.ExceptionTranslator;
 import de.maibornwolff.ste.bookingham_palace.user.api.databuilder.CredentialsBuilder;
 import de.maibornwolff.ste.bookingham_palace.user.api.databuilder.UserBuilder;
-import de.maibornwolff.ste.bookingham_palace.user.api.databuilder.UserRequestBuilder;
 import de.maibornwolff.ste.bookingham_palace.user.model.Credentials;
-import de.maibornwolff.ste.bookingham_palace.user.model.UserRequest;
 import de.maibornwolff.ste.bookingham_palace.user.repository.UserRepository;
-import de.maibornwolff.ste.bookingham_palace.user.service.UserService;
 import de.maibornwolff.ste.bookingham_palace.util.TestUtil;
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

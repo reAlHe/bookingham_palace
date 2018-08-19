@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import de.maibornwolff.ste.bookingham_palace.system.errors.BadRequestAlertException;
 import de.maibornwolff.ste.bookingham_palace.user.api.mapper.UserMapper;
 import de.maibornwolff.ste.bookingham_palace.user.model.User;
-import de.maibornwolff.ste.bookingham_palace.user.model.UserRequest;
+import de.maibornwolff.ste.bookingham_palace.user.api.dto.UserRequest;
 import de.maibornwolff.ste.bookingham_palace.user.service.UserService;
 import de.maibornwolff.ste.bookingham_palace.user.service.errors.UsernameAlreadyInUseException;
 import static de.maibornwolff.ste.bookingham_palace.user.api.constants.ErrorConstants.KEY_USER_ALREADY_REGISTERED;

@@ -1,14 +1,11 @@
-package de.maibornwolff.ste.bookingham_palace.hotel.model;
+package de.maibornwolff.ste.bookingham_palace.hotel.api.dto;
 
 import java.util.List;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import de.maibornwolff.ste.bookingham_palace.rating.model.Rating;
-import de.maibornwolff.ste.bookingham_palace.rating.model.RatingResponse;
+import de.maibornwolff.ste.bookingham_palace.hotel.model.Feature;
 
-public class HotelResponse {
-
-    private long id;
+public class HotelRequest {
 
     private String name;
 
@@ -20,12 +17,10 @@ public class HotelResponse {
 
     private String contact;
 
-    private List<RatingResponse> ratings;
-
     private List<Feature> features;
 
 
-    public HotelResponse() {
+    public HotelRequest() {
     }
 
 
@@ -79,16 +74,6 @@ public class HotelResponse {
     }
 
 
-    public long getId() {
-        return id;
-    }
-
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-
     public List<Feature> getFeatures() {
         return features;
     }
@@ -96,16 +81,6 @@ public class HotelResponse {
 
     public void setFeatures(List<Feature> features) {
         this.features = features;
-    }
-
-
-    public List<RatingResponse> getRatings() {
-        return ratings;
-    }
-
-
-    public void setRatings(List<RatingResponse> ratings) {
-        this.ratings = ratings;
     }
 
 
@@ -117,34 +92,30 @@ public class HotelResponse {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        HotelResponse that = (HotelResponse) o;
-        return id == that.id &&
-                Objects.equal(name, that.name) &&
+        HotelRequest that = (HotelRequest) o;
+        return Objects.equal(name, that.name) &&
                 Objects.equal(street, that.street) &&
                 Objects.equal(zipcode, that.zipcode) &&
                 Objects.equal(city, that.city) &&
                 Objects.equal(contact, that.contact) &&
-                Objects.equal(ratings, that.ratings) &&
                 Objects.equal(features, that.features);
     }
 
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, name, street, zipcode, city, contact, ratings, features);
+        return Objects.hashCode(name, street, zipcode, city, contact, features);
     }
 
 
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("id", id)
                 .add("name", name)
                 .add("street", street)
                 .add("zipcode", zipcode)
                 .add("city", city)
                 .add("contact", contact)
-                .add("ratings", ratings)
                 .add("features", features)
                 .toString();
     }

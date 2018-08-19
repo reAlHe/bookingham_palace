@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import de.maibornwolff.ste.bookingham_palace.hotel.model.Hotel;
-import de.maibornwolff.ste.bookingham_palace.hotel.model.HotelRequest;
-import de.maibornwolff.ste.bookingham_palace.hotel.model.HotelResponse;
+import de.maibornwolff.ste.bookingham_palace.hotel.api.dto.HotelRequest;
+import de.maibornwolff.ste.bookingham_palace.hotel.api.dto.HotelResponse;
 import de.maibornwolff.ste.bookingham_palace.rating.api.mapper.RatingMapper;
 import de.maibornwolff.ste.bookingham_palace.user.service.UserService;
 
