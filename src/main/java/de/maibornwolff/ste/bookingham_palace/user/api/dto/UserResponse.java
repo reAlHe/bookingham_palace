@@ -1,16 +1,14 @@
 package de.maibornwolff.ste.bookingham_palace.user.api.dto;
 
 import java.io.Serializable;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import de.maibornwolff.ste.bookingham_palace.user.model.User;
 
 public class UserResponse implements Serializable {
 
-    @JsonProperty
     private String username;
-    @JsonProperty
+
     private String firstName;
-    @JsonProperty
+
     private String lastName;
 
     public UserResponse() {

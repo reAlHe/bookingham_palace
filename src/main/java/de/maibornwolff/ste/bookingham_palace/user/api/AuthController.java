@@ -3,6 +3,7 @@ package de.maibornwolff.ste.bookingham_palace.user.api;
 import javax.naming.AuthenticationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +36,7 @@ public class AuthController {
 
 
     /**
-     * POST /authentication/auth : Authenticates the user
+     * POST /authentication/auth : Authenticates the user.
      *
      * @param credentials the credentials
      * @return a token with status 200 (ok),
@@ -64,8 +65,8 @@ public class AuthController {
      * or status 403 (forbidden) when the token is not valid
      */
     @PostMapping(value = "/validate")
-    public ResponseEntity<Token> validateToken(@RequestBody Token token) {
-        if(Tokens.verify(token.getToken())){
+    public ResponseEntity<Token> validateToken(@CookieValue(value = "token", required = false) String token) {
+        if(Tokens.verify(token)){
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
@@ -80,8 +81,8 @@ public class AuthController {
      * @return status 200 (ok)
      */
     @PostMapping(value = "/logout")
-    public ResponseEntity clearToken(@RequestBody Token token) {
-        Tokens.clear(token.getToken());
+    public ResponseEntity clearToken(@CookieValue(value = "token", required = false) String token) {
+        Tokens.clear(token);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

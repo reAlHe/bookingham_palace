@@ -50,7 +50,7 @@ public class HotelController {
 
 
     /**
-     * POST /hotels : Creates a new hotel
+     * POST /hotels : Creates a new hotel.
      *
      * @param hotel the hotel to be created
      * @param token the token to validate the user
@@ -74,7 +74,7 @@ public class HotelController {
 
 
     /**
-     * PUT /hotels/hotelId : Updates the hotel with id
+     * PUT /hotels/hotelId : Updates the hotel with id.
      *
      * @param hotel   the hotel update
      * @param hotelId the id of the hotel to be updated
@@ -107,7 +107,7 @@ public class HotelController {
 
 
     /**
-     * GET /hotels?city=city : Gets a list with all hotels in the given city
+     * GET /hotels?city=city : Gets a list with all hotels in the given city.
      *
      * @param token the token to validate the user
      * @param city  the city to search for
@@ -126,7 +126,7 @@ public class HotelController {
 
 
     /**
-     * GET /hotels?city=city&minimumRating=minimumRating : Gets a list with all hotels in a city that have an average rating better than a minimum
+     * GET /hotels?city=city&minimumRating=minimumRating : Gets a list with all hotels in a city that have an average rating better than a minimum.
      *
      * @param token         the token to validate the user
      * @param city          the city to search for
@@ -147,7 +147,7 @@ public class HotelController {
 
 
     /**
-     * GET /hotels/rating/hotelId : Gets the average rating for a given hotel
+     * GET /hotels/rating/hotelId : Gets the average rating for a given hotel.
      *
      * @param token   the token to validate the user
      * @param hotelId the id of the hotel

@@ -41,7 +41,7 @@ public class UserService {
      */
     @Transactional
     public User createUser(User user) {
-        log.info("Received request for creating user {}", user);
+        log.info("Received request to create an user {}", user);
         if (isUsernameInUse(user.getUsername())) {
             throw new UsernameAlreadyInUseException();
         }
@@ -56,6 +56,7 @@ public class UserService {
      * @return a token to identify the user
      * @throws AuthenticationException is thrown when the credentials does not identify a user
      */
+    @Transactional
     public Token authenticateUser(Credentials credentials) throws AuthenticationException {
         log.info("Received request for authenticating user with credentials {}", credentials);
         User user = findUserByUsername(credentials.getUsername());
